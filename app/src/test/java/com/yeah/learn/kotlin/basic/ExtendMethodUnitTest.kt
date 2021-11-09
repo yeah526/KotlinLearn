@@ -18,11 +18,11 @@ class ExtendMethodUnitTest {
     }
 
     private fun String.extendMethod1() {
-        println("This is extendMethod1(): this = $this")
+        println("This is String extendMethod1(): this = $this")
     }
 
     private val extendMethod2 : String.() -> Unit = {
-        println("This is extendMethod2(): this = $this")
+        println("This is String extendMethod2(): this = $this")
     }
 
     @Test
@@ -34,7 +34,7 @@ class ExtendMethodUnitTest {
     }
 
     private fun <T> T.extendMethod() {
-        println("This is extendMethod1(): this is ${if(this == null) null else this!!::class.java}; this = $this")
+        println("This is T extendMethod(): this is ${if(this == null) null else this!!::class.java}; this = $this")
     }
 
 }
