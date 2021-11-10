@@ -1,5 +1,8 @@
 package com.yeah.learn.kotlin.basic
 
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import org.junit.Test
 
 /**
@@ -37,5 +40,43 @@ class HigherOrderMethodUnitTest {
     private fun higherOrderMethod2(userName: String, password: String): () -> Boolean {
         return { userName == password }
     }
+
+    @Test
+    fun testRxJava() {
+        io.reactivex.Observable.create(ObservableOnSubscribe<Any> {
+            it.onNext("ABC")
+            it.onNext(123)
+            it.onComplete()
+        }).subscribe(object : Observer<Any> {
+            override fun onSubscribe(d: Disposable) {
+                println("onSubscribe")
+            }
+
+            override fun onNext(t: Any) {
+                println("onNext: t = $t")
+            }
+
+            override fun onError(e: Throwable) {
+                println("onError: e = $e")
+            }
+
+            override fun onComplete() {
+                println("onComplete")
+            }
+
+        })
+
+        create {
+            "ABC"
+        }.observe {
+            println("this = $this")
+        }
+    }
+
+    private class Observable<T>(var item: T) {
+        fun observe(action: T.() -> Unit) = action(item)
+    }
+
+    private fun <R> create(action: () -> R) = Observable(action())
 
 }
