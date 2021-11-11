@@ -69,12 +69,12 @@ class HigherOrderMethodUnitTest {
         create {
             "ABC"
         }.observe {
-            println("this = $this")
+            println("it = $it")
         }
     }
 
     private class Observable<T>(var item: T) {
-        fun observe(action: T.() -> Unit) = action(item)
+        fun observe(action: (item: T) -> Unit) = action(item)
     }
 
     private fun <R> create(action: () -> R) = Observable(action())
