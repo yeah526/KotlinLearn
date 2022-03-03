@@ -8,7 +8,7 @@ import org.junit.Test
  * @author: heweiyan
  * @date  : 2022/2/25
  */
-class ListGetUnitTest {
+class ListUnitTest {
 
     @Test
     fun testListGetUsage() {
